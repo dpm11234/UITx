@@ -1,18 +1,18 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-import Login from './app/screens/Login';
+import SubjectCard from './app/components/SubjectCard';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Login />
+      <SubjectCard />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
   }
 });
