@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, ImageBackground, Text, TextInput, TouchableOpacity } from 'react-native';
 
-class index extends Component {
+class Login extends Component {
    render() {
       return (
          <View style={ { flex: 1 } }>
             <View style={{ flex: 30 }}>
                <ImageBackground
-                  source={{ uri: 'https://studynav.com/wp-content/uploads/2019/06/hoc-phi-DH-cong-nghe-thong-tin-UIT.jpg' }}
+                  source={ require('../../../assets/images/bg-login.jpg') }
                   style={{ flex: 1 }}
                />
             </View>
@@ -85,4 +85,4 @@ const styles = StyleSheet.create({
    }
  });
 
-export default index;
+export default Login;
