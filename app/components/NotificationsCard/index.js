@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 
 class NotificationsCard extends Component {
   render() {
@@ -9,7 +9,8 @@ class NotificationsCard extends Component {
           backgroundColor: "rgb(252, 225, 188)",
           paddingVertical: 10,
           paddingHorizontal: 15,
-          borderRadius: 5
+          borderRadius: 5,
+          zIndex: 20
         }}
       >
         <View
@@ -63,20 +64,19 @@ class NotificationsCard extends Component {
           <Text style={{ fontSize: 16, color: "rgb(137, 90, 45)" }}>...</Text>
         </View>
 
-        <View
+        <TouchableOpacity
           style={{
             position: "absolute",
-            width: 30,
-            height: 30,
-            backgroundColor: "red",
-            left: '100%',
-            // transform: [
-            //    { translateX: 50 }
-            // ]
+            flex: 0,
+            backgroundColor: "white",
+            right: -7,
+            top: -7,
+            borderRadius: 50,
+            padding: 7,
           }}
         >
-          <Text>X</Text>
-        </View>
+          <Text style={{ fontSize: 15, backgroundColor: 'rgb(252, 225, 188)', color: 'white', borderRadius: 70, textAlign: 'center', paddingHorizontal: 6, paddingVertical: 2 }}>X</Text>
+        </TouchableOpacity>
       </View>
     );
   }

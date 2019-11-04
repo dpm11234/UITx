@@ -1,13 +1,24 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, ImageBackground, Text, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, ImageBackground, Text, TextInput, TouchableOpacity, AsyncStorage } from 'react-native';
 
 class Login extends Component {
+
+   static navigationOptions = {
+      header: null,
+   };
+
+   _signInAsync = async () => {
+      await AsyncStorage.setItem('userToken', 'test');
+      this.props.navigation.navigate('App');
+   }
+
+
    render() {
       return (
-         <View style={ { flex: 1 } }>
+         <View style={{ flex: 1 }}>
             <View style={{ flex: 30 }}>
                <ImageBackground
-                  source={ require('../../../assets/images/bg-login.jpg') }
+                  source={require('../../../assets/images/bg-login.jpg')}
                   style={{ flex: 1 }}
                />
             </View>
@@ -21,21 +32,22 @@ class Login extends Component {
                      Vui lòng đăng nhập để tiếp tục
                   </Text>
                   <View style={{ width: '80%', marginVertical: 20 }}>
-                     <TextInput 
+                     <TextInput
                         style={styles.textInput}
                         placeholder="MSSV"
                         placeholderTextColor="#b3b3b3"
                      />
 
-                     <TextInput 
+                     <TextInput
                         style={styles.textInput}
                         placeholder="Mật Khẩu"
                         placeholderTextColor="#b3b3b3"
                      />
 
-                     <TouchableOpacity 
+                     <TouchableOpacity
                         style={styles.loginButton}
                         activeOpacity={0.9}
+                        onPress={() => { this._signInAsync() }}
                      >
                         <Text style={styles.textButton}>
                            Đăng Nhập
@@ -55,12 +67,12 @@ class Login extends Component {
 }
 
 const styles = StyleSheet.create({
-   loginContent: { 
+   loginContent: {
       flex: 70,
       marginTop: -25,
       backgroundColor: 'white',
       borderTopLeftRadius: 25,
-      borderTopRightRadius: 25 
+      borderTopRightRadius: 25
    },
    textInput: {
       fontSize: 20,
@@ -70,7 +82,7 @@ const styles = StyleSheet.create({
       paddingHorizontal: 25,
       paddingVertical: 10
    },
-   loginButton: { 
+   loginButton: {
       backgroundColor: '#8baefd',
       marginHorizontal: 10,
       marginTop: 15,
@@ -83,6 +95,6 @@ const styles = StyleSheet.create({
       fontWeight: '500',
       textAlign: 'center'
    }
- });
+});
 
 export default Login;

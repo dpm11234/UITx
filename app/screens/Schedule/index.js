@@ -2,24 +2,34 @@ import React, { Component } from "react";
 import { View, Text, ScrollView } from "react-native";
 import ListCalendarLine from "../../components/ListCalendarLines";
 import CalendarStrip from "react-native-calendar-strip";
+import Header from '../../components/Header';
 
 class Schedule extends Component {
+  static navigationOptions = ({ navigation }) => {
+    return {
 
-   constructor(props) {
-      super(props);
-      this.state = {
-         selectDate: ''
+      header: () => {
+        return (
+          <Header navigation={navigation} />
+        );
       }
-   }
+    };
+  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectDate: ''
+    }
+  }
 
-   _onSelectDate = (date) => {
-      this.setState({
-         selectDate: date
-      }, () => {
-         console.log(this.state.selectDate);
-      });
-      
-   }
+  _onSelectDate = (date) => {
+    this.setState({
+      selectDate: date
+    }, () => {
+      console.log(this.state.selectDate);
+    });
+
+  }
 
   render() {
     return (

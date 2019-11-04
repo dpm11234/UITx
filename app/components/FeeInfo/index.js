@@ -1,12 +1,30 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
+import FeeCard from '../FeeCard';
 
 class FeeInfo extends Component {
    render() {
       return (
-         <View style={{ flex: 1, backgroundColor: 'red' }}>  
-            <Text>FeeInfo</Text>
-         </View>
+         <ScrollView>
+            <View>
+               <FeeCard />
+            </View>
+            <View>
+               <FeeCard />
+            </View>
+            <View>
+               <FeeCard />
+            </View>
+            <View>
+               <FeeCard />
+            </View>
+            <View>
+               <FeeCard />
+            </View>
+            <View>
+               <FeeCard />
+            </View>
+         </ScrollView>
       );
    }
 }
