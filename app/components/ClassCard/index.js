@@ -12,12 +12,12 @@ class ClassCard extends Component {
 
                <View style={{ flex: 0, flexDirection: 'row', marginHorizontal: 7 }}>
                   <View style={{ flex: 50, flexDirection: 'row', alignItems: 'center' }}>
-                     <FontAwesome name='clock-o' size={25} />
-                     <Text style={{ fontSize: 17, marginLeft: 5 }}>3 DeadLine</Text>
+                     <FontAwesome name='clock-o' size={20} />
+                     <Text style={{ fontSize: 16, marginLeft: 5 }}>3 DeadLine</Text>
                   </View>
                   <View style={{ flex: 50, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
-                     <FontAwesome name='clock-o' size={25} />
-                     <Text style={{ fontSize: 17, marginLeft: 5 }}>7 Thảo Luận</Text>
+                     <FontAwesome name='clock-o' size={20} />
+                     <Text style={{ fontSize: 16, marginLeft: 5 }}>7 Thảo Luận</Text>
                   </View>
                </View>
 
@@ -41,7 +41,7 @@ class ClassCard extends Component {
                      />
                   </View>
                   <View style={{ flex: 50, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-                     <Text style={{ fontSize: 18 }}>120 Thành Viên</Text>
+                     <Text style={{ fontSize: 16 }}>120 Thành Viên</Text>
                   </View>
                </View>
             </View>

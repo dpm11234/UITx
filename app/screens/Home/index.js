@@ -3,7 +3,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import React, { Component } from 'react';
 import { View } from 'react-native';
-
+import { FontAwesome } from 'react-native-vector-icons';
 
 import Schedule from '../Schedule';
 import Deadline from '../Deadline';
@@ -50,6 +50,23 @@ const Home = createBottomTabNavigator(
          activeTintColor: '#42f44b',
          inactiveTintColor: 'gray',
       },
+      defaultNavigationOptions: ({ navigation }) => ({
+         tabBarIcon: ({ focused, horizontal, tintColor }) => {
+            const { routeName } = navigation.state;
+            switch (routeName) {
+               case 'Schedule':
+                  return <FontAwesome name={'calendar'} size={16} />
+               case 'Class':
+                  return <FontAwesome name={'clock-o'} size={16} />
+               case 'Deadline':
+                  return <FontAwesome name={'bell-o'} size={16} />
+
+               case 'Notification':
+                  return <FontAwesome name={'group'} size={16} />
+
+            }
+         }
+      })
    }
 );
 

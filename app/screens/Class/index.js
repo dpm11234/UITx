@@ -76,17 +76,17 @@ class Class extends Component {
         <View style={{ paddingHorizontal: '7%' }}>
           <Text style={{ fontSize: 25 }}>Lập trình Java - <Text style={{ fontSize: 18 }}> IS210.K11</Text></Text>
           <View style={{ flexDirection: 'row', marginVertical: 10 }}>
-            <Text style={{ fontSize: 18, flex: 30 }}>Giảng viên</Text>
+            <Text style={{ fontSize: 16, flex: 30 }}>Giảng viên</Text>
             <View style={{ flex: 70 }}>
-              <Text style={{ fontSize: 18 }}>- Vũ Minh Sang</Text>
-              <Text style={{ fontSize: 18, marginTop: 5 }}>- Vũ Minh Sang (thực hành)</Text>
+              <Text style={{ fontSize: 16 }}>- Vũ Minh Sang</Text>
+              <Text style={{ fontSize: 16, marginTop: 5 }}>- Vũ Minh Sang (thực hành)</Text>
             </View>
           </View>
           <View style={{ flexDirection: 'row' }}>
-            <Text style={{ fontSize: 18, flex: 30 }}>Lịch học</Text>
+            <Text style={{ fontSize: 16, flex: 30 }}>Lịch học</Text>
             <View style={{ flex: 70 }}>
-              <Text style={{ fontSize: 18 }}>- Thứ 3, tiết 1, 2, 3 (phòng C212)</Text>
-              <Text style={{ fontSize: 18, marginTop: 5 }}>- Thứ 3, tiết 1, 2, 3 (thực hành - phòng C212)</Text>
+              <Text style={{ fontSize: 16 }}>- Thứ 3, tiết 1, 2, 3 (phòng C212)</Text>
+              <Text style={{ fontSize: 16, marginTop: 5 }}>- Thứ 3, tiết 1, 2, 3 (thực hành - phòng C212)</Text>
             </View>
           </View>
         </View>
@@ -96,14 +96,14 @@ class Class extends Component {
               style={{ flex: 1 }}
               onPress={() => { console.log('test') }}
             >
-              <Text style={{ fontSize: 18 }}>Thông Báo</Text>
+              <Text style={{ fontSize: 16 }}>Thông Báo</Text>
             </TouchableOpacity>
           </View>
           <View style={{ flex: 2 }}>
             <TouchableOpacity
               style={{ flex: 1 }}
             >
-              <Text style={{ fontSize: 18, textAlign: 'center' }}>Thảo Luận</Text>
+              <Text style={{ fontSize: 16, textAlign: 'center' }}>Thảo Luận</Text>
               <View style={{ width: '100%', alignItems: 'center' }}>
                 <View style={{ height: 4, backgroundColor: 'blue', width: '40%' }} />
               </View>
@@ -113,14 +113,14 @@ class Class extends Component {
             <TouchableOpacity
               style={{ flex: 1 }}
             >
-              <Text style={{ fontSize: 18, textAlign: 'center' }}>File</Text>
+              <Text style={{ fontSize: 16, textAlign: 'center' }}>File</Text>
             </TouchableOpacity>
           </View>
           <View style={{ flex: 2 }}>
             <TouchableOpacity
               style={{ flex: 1 }}
             >
-              <Text style={{ fontSize: 18, textAlign: 'center' }}>Thành Viên</Text>
+              <Text style={{ fontSize: 16, textAlign: 'center' }}>Thành Viên</Text>
             </TouchableOpacity>
           </View>
         </View>

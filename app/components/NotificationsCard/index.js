@@ -29,24 +29,24 @@ class NotificationsCard extends Component {
               borderRadius: 8
             }}
           >
-            <Text style={{ fontSize: 20, color: "rgb(137, 90, 45)" }}>
+            <Text style={{ fontSize: 18, color: "rgb(137, 90, 45)" }}>
               Nghỉ Học
             </Text>
           </View>
           <View>
-            <Text style={{ fontSize: 20, color: "rgb(137, 90, 45)" }}>
+            <Text style={{ fontSize: 18, color: "rgb(137, 90, 45)" }}>
               Lớp IT001.K13
             </Text>
           </View>
         </View>
         <View style={{ marginVertical: 10 }}>
           <View>
-            <Text style={{ fontSize: 20, color: "rgb(137, 90, 45)" }}>
+            <Text style={{ fontSize: 18, color: "rgb(137, 90, 45)" }}>
               Giải Tích
             </Text>
           </View>
           <View>
-            <Text style={{ fontSize: 20, color: "rgb(137, 90, 45)" }}>
+            <Text style={{ fontSize: 18, color: "rgb(137, 90, 45)" }}>
               Thứ 3. 16/10/2019
             </Text>
           </View>

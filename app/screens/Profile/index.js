@@ -14,7 +14,7 @@ class Profile extends Component {
   constructor() {
     super();
     this.state = {
-      activeButton: [],
+      activeButton: '#8BAEFD',
       typeNavigate: 'tablePoint',
       component: <TablePoint />
     };
@@ -65,15 +65,15 @@ class Profile extends Component {
               }}
             >
               <View style={{ width: "100%", flex: 1 }}>
-                <Text style={{ fontSize: 22, fontWeight: "bold" }}>
+                <Text style={{ fontSize: 20, fontWeight: "bold" }}>
                   Dương Phước Mậu
                 </Text>
               </View>
               <View style={{ flex: 1 }}>
-                <Text style={{ fontSize: 18 }}>17520739</Text>
+                <Text style={{ fontSize: 17 }}>17520739</Text>
               </View>
               <View style={{ flex: 1 }}>
-                <Text style={{ fontSize: 18 }}>Hệ thống thông tin 2017</Text>
+                <Text style={{ fontSize: 17 }}>Hệ thống thông tin 2017</Text>
               </View>
               <View
                 style={{ flex: 1, flexDirection: "row", alignItems: "center" }}
@@ -93,8 +93,8 @@ class Profile extends Component {
                 <TouchableOpacity
                   style={{
                     flex: 0,
-                     flexDirection: 'row',
-                     alignItems: 'center',
+                    flexDirection: 'row',
+                    alignItems: 'center',
                     backgroundColor: "#35E0F7",
                     paddingHorizontal: 18,
                     borderRadius: 25
@@ -119,7 +119,7 @@ class Profile extends Component {
               <Text
                 style={{
                   textAlign: "center",
-                  fontSize: 20,
+                  fontSize: 18,
                   fontWeight: "bold"
                 }}
               >
@@ -131,7 +131,7 @@ class Profile extends Component {
               <Text
                 style={{
                   textAlign: "center",
-                  fontSize: 20,
+                  fontSize: 18,
                   fontWeight: "bold"
                 }}
               >
@@ -145,7 +145,7 @@ class Profile extends Component {
               <Text
                 style={{
                   textAlign: "center",
-                  fontSize: 20,
+                  fontSize: 18,
                   fontWeight: "bold"
                 }}
               >
@@ -168,9 +168,10 @@ class Profile extends Component {
                   <FontAwesome
                     name="file-text"
                     size={24}
+                    color={this.state.typeNavigate === 'tablePoint' ? this.state.activeButton : 'black'}
                   />
                 </View>
-                <Text style={{ fontSize: 16, textAlign: "center" }}>
+                <Text style={{ fontSize: 16, textAlign: "center", color:this.state.typeNavigate === 'tablePoint' ? this.state.activeButton : 'black' }}>
                   Bảng Điểm
               </Text>
 
@@ -189,9 +190,10 @@ class Profile extends Component {
                   <FontAwesome
                     name="money"
                     size={24}
+                    color={this.state.typeNavigate === 'feeInfo' ? this.state.activeButton : 'black'}
                   />
                 </View>
-                <Text style={{ fontSize: 16, textAlign: "center" }}>
+                <Text style={{ fontSize: 16, textAlign: "center", color:this.state.typeNavigate === 'feeInfo' ? this.state.activeButton : 'black' }}>
                   Học Phí
                 </Text>
               </TouchableOpacity>
@@ -208,9 +210,10 @@ class Profile extends Component {
                   <FontAwesome
                     name="calendar-check-o"
                     size={24}
+                    color={this.state.typeNavigate === 'examSchedule' ? this.state.activeButton : 'black'}
                   />
                 </View>
-                <Text style={{ fontSize: 16, textAlign: "center" }}>
+                <Text style={{ fontSize: 16, textAlign: "center", color:this.state.typeNavigate === 'examSchedule' ? this.state.activeButton : 'black' }}>
                   Lịch Thi
                 </Text>
               </TouchableOpacity>
@@ -227,9 +230,10 @@ class Profile extends Component {
                   <FontAwesome
                     name="leanpub"
                     size={24}
+                    color={this.state.typeNavigate === 'schemeTraining' ? this.state.activeButton : 'black'}
                   />
                 </View>
-                <Text style={{ fontSize: 16, textAlign: "center" }}>
+                <Text style={{ fontSize: 16, textAlign: "center", color:this.state.typeNavigate === 'schemeTraining' ? this.state.activeButton : 'black' }}>
                   CT Đào Tạo
                 </Text>
               </TouchableOpacity>
