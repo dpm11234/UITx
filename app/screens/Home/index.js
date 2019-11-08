@@ -1,8 +1,7 @@
-import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View, Image } from 'react-native';
 import { FontAwesome } from 'react-native-vector-icons';
 
 import Schedule from '../Schedule';
@@ -12,64 +11,91 @@ import Notification from '../Notification';
 import Class from '../Class';
 
 const ScheduleStack = createStackNavigator({
-   Schedule: { screen: Schedule }
+  Schedule: { screen: Schedule },
 });
 
 const DeadlineStack = createStackNavigator({
-   Deadline: { screen: Deadline }
+  Deadline: { screen: Deadline },
 });
 
 const NotificationStack = createStackNavigator({
-   Notification: { screen: Notification }
+  Notification: { screen: Notification },
 });
 
 const ProfileStack = createStackNavigator({
-   Profile: { screen: Profile }
+  Profile: { screen: Profile },
 });
 
 const ClassStack = createStackNavigator({
-   Class: { screen: Class }
+  Class: { screen: Class },
 });
 
-
 const Home = createBottomTabNavigator(
-   {
-      Class: { screen: ClassStack },
-      Deadline: { screen: DeadlineStack },
-      Notification: { screen: NotificationStack },
-      Profile: {
-         screen: ProfileStack,
-         navigationOptions: {
-            tabBarButtonComponent: () => { return <View></View> }
-         }
+  {
+    Class: { screen: ClassStack },
+    Deadline: { screen: DeadlineStack },
+    Notification: { screen: NotificationStack },
+    Profile: {
+      screen: ProfileStack,
+      navigationOptions: {
+        tabBarButtonComponent: () => {
+          return <View />;
+        },
       },
-      Schedule: { screen: ScheduleStack },
-   },
-   {
-      tabBarOptions: {
-         activeTintColor: '#42f44b',
-         inactiveTintColor: 'gray',
+    },
+    Schedule: { screen: ScheduleStack },
+  },
+  {
+    tabBarOptions: {
+      activeTintColor: '#42f44b',
+      inactiveTintColor: 'gray',
+    },
+    defaultNavigationOptions: ({ navigation }) => ({
+      tabBarIcon: ({ focused, horizontal, tintColor }) => {
+        const { routeName } = navigation.state;
+        switch (routeName) {
+          case 'Schedule':
+            return (
+              <Image source={require('../../../assets/images/calendar.png')}
+                style={{
+                  height: 20,
+                  width: 20,
+                }}
+              />
+            );
+          case 'Class':
+            return (
+              <Image source={require('../../../assets/images/group.png')}
+                style={{
+                  height: 20,
+                  width: 20,
+                }}
+              />
+            );
+          case 'Deadline':
+            return (
+              <Image source={require('../../../assets/images/clock.png')}
+                style={{
+                  height: 20,
+                  width: 20,
+                }}
+              />
+            );
+
+          case 'Notification':
+            return (
+              <Image source={require('../../../assets/images/ring.png')}
+                style={{
+                  height: 20,
+                  width: 20,
+                }}
+              />
+            );
+        }
       },
-      defaultNavigationOptions: ({ navigation }) => ({
-         tabBarIcon: ({ focused, horizontal, tintColor }) => {
-            const { routeName } = navigation.state;
-            switch (routeName) {
-               case 'Schedule':
-                  return <FontAwesome name={'calendar'} size={16} />
-               case 'Class':
-                  return <FontAwesome name={'clock-o'} size={16} />
-               case 'Deadline':
-                  return <FontAwesome name={'bell-o'} size={16} />
-
-               case 'Notification':
-                  return <FontAwesome name={'group'} size={16} />
-
-            }
-         }
-      })
-   }
+    }),
+  },
 );
-
 
 // export default createAppContainer(Home);
 export default Home;
