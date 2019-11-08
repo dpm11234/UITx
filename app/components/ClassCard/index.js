@@ -6,18 +6,18 @@ class ClassCard extends Component {
    render() {
 
       return (
-         <View style={{ elevation: 5, width: '100%', borderWidth: 1, borderRadius: 20, borderColor: 'rgba(0, 0, 0, 0)' }}>
-            <View style={{ padding: 10 }}>
-               <Text style={{ textAlign: 'center', fontSize: 26, fontWeight: "500", marginBottom: 10 }}>Lập Trình Java</Text>
+         <View style={{ elevation: 3, width: '100%', borderWidth: 1, borderRadius: 20, borderColor: 'rgba(0, 0, 0, 0)' }}>
+            <View style={{ padding: 8 }}>
+               <Text style={{ textAlign: 'center', fontSize: 24, fontWeight: "500", marginBottom: 7 }}>Lập Trình Java</Text>
 
                <View style={{ flex: 0, flexDirection: 'row', marginHorizontal: 7 }}>
                   <View style={{ flex: 50, flexDirection: 'row', alignItems: 'center' }}>
                      <FontAwesome name='clock-o' size={25} />
-                     <Text style={{ fontSize: 18, marginLeft: 5 }}>3 DeadLine</Text>
+                     <Text style={{ fontSize: 17, marginLeft: 5 }}>3 DeadLine</Text>
                   </View>
                   <View style={{ flex: 50, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
                      <FontAwesome name='clock-o' size={25} />
-                     <Text style={{ fontSize: 18, marginLeft: 5 }}>7 Thảo Luận</Text>
+                     <Text style={{ fontSize: 17, marginLeft: 5 }}>7 Thảo Luận</Text>
                   </View>
                </View>
 

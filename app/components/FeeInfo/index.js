@@ -5,7 +5,7 @@ import FeeCard from '../FeeCard';
 class FeeInfo extends Component {
    render() {
       return (
-         <ScrollView>
+         <View>
             <View>
                <FeeCard />
             </View>
@@ -24,7 +24,7 @@ class FeeInfo extends Component {
             <View>
                <FeeCard />
             </View>
-         </ScrollView>
+         </View>
       );
    }
 }

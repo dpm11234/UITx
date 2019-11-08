@@ -3,6 +3,7 @@ import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 
 import NotificationsCard from '../../components/NotificationsCard';
 import Header from '../../components/Header';
+import ListNotifications from '../../components/ListNotifications';
 class Notification extends Component {
    static navigationOptions = ({ navigation }) => {
       return {
@@ -79,32 +80,7 @@ class Notification extends Component {
                </View>
             </View>
 
-            <ScrollView>
-               <View style={{ marginBottom: 20 }}>
-                  <NotificationsCard />
-               </View>
-               <View style={{ marginBottom: 20 }}>
-                  <NotificationsCard />
-               </View>
-               <View style={{ marginBottom: 20 }}>
-                  <NotificationsCard />
-               </View>
-               <View style={{ marginBottom: 20 }}>
-                  <NotificationsCard />
-               </View>
-               <View style={{ marginBottom: 20 }}>
-                  <NotificationsCard />
-               </View>
-               <View style={{ marginBottom: 20 }}>
-                  <NotificationsCard />
-               </View>
-               <View style={{ marginBottom: 20 }}>
-                  <NotificationsCard />
-               </View>
-               <View style={{ marginBottom: 20 }}>
-                  <NotificationsCard />
-               </View>
-            </ScrollView>
+            <ListNotifications />
          </View>
       );
    }

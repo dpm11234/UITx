@@ -5,11 +5,14 @@ import {
   Image,
   Dimensions,
   TouchableOpacity,
-  StatusBar
+  StatusBar,
+  ScrollView,
+  TouchableHighlight
 } from "react-native";
 import Carousel from "react-native-snap-carousel";
 import ClassCard from "../../components/ClassCard";
 import Header from '../../components/Header';
+import ListNotifications from "../../components/ListNotifications";
 
 const data = [
   {
@@ -59,7 +62,7 @@ class Class extends Component {
 
   render() {
     return (
-      <View>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <Carousel
           ref={c => {
             this._carousel = c;
@@ -70,7 +73,63 @@ class Class extends Component {
           itemWidth={this.state.width * 0.7}
           loop={true}
         />
-      </View>
+        <View style={{ paddingHorizontal: '7%' }}>
+          <Text style={{ fontSize: 25 }}>Lập trình Java - <Text style={{ fontSize: 18 }}> IS210.K11</Text></Text>
+          <View style={{ flexDirection: 'row', marginVertical: 10 }}>
+            <Text style={{ fontSize: 18, flex: 30 }}>Giảng viên</Text>
+            <View style={{ flex: 70 }}>
+              <Text style={{ fontSize: 18 }}>- Vũ Minh Sang</Text>
+              <Text style={{ fontSize: 18, marginTop: 5 }}>- Vũ Minh Sang (thực hành)</Text>
+            </View>
+          </View>
+          <View style={{ flexDirection: 'row' }}>
+            <Text style={{ fontSize: 18, flex: 30 }}>Lịch học</Text>
+            <View style={{ flex: 70 }}>
+              <Text style={{ fontSize: 18 }}>- Thứ 3, tiết 1, 2, 3 (phòng C212)</Text>
+              <Text style={{ fontSize: 18, marginTop: 5 }}>- Thứ 3, tiết 1, 2, 3 (thực hành - phòng C212)</Text>
+            </View>
+          </View>
+        </View>
+        <View style={{ flexDirection: 'row', marginHorizontal: '7%', marginTop: '5%', marginBottom: 10 }}>
+          <View style={{ flex: 2 }}>
+            <TouchableOpacity
+              style={{ flex: 1 }}
+              onPress={() => { console.log('test') }}
+            >
+              <Text style={{ fontSize: 18 }}>Thông Báo</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={{ flex: 2 }}>
+            <TouchableOpacity
+              style={{ flex: 1 }}
+            >
+              <Text style={{ fontSize: 18, textAlign: 'center' }}>Thảo Luận</Text>
+              <View style={{ width: '100%', alignItems: 'center' }}>
+                <View style={{ height: 4, backgroundColor: 'blue', width: '40%' }} />
+              </View>
+            </TouchableOpacity>
+          </View>
+          <View style={{ flex: 1 }}>
+            <TouchableOpacity
+              style={{ flex: 1 }}
+            >
+              <Text style={{ fontSize: 18, textAlign: 'center' }}>File</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={{ flex: 2 }}>
+            <TouchableOpacity
+              style={{ flex: 1 }}
+            >
+              <Text style={{ fontSize: 18, textAlign: 'center' }}>Thành Viên</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+
+        <View style={{ marginHorizontal: '10%' }}>
+          <ListNotifications />
+        </View>
+
+      </ScrollView>
     );
   }
 }

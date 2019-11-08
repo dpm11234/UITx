@@ -51,7 +51,7 @@ class Profile extends Component {
           <View style={{ flex: 1, flexDirection: "row", alignItems: "center" }}>
             <View style={{ flex: 30 }}>
               <Image
-                style={{ width: 100, height: 100, borderRadius: 100 }}
+                style={{ width: 100, height: 100, borderRadius: 50 }}
                 source={{
                   uri: `https://interactive-examples.mdn.mozilla.net/media/examples/grapefruit-slice-332-332.jpg`
                 }}
@@ -236,7 +236,7 @@ class Profile extends Component {
             </View>
           </View>
         </View>
-        <ScrollView>
+        <ScrollView showsVerticalScrollIndicator={false}>
           {
             this.state.component
           }
