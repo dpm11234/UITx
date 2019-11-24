@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, AsyncStorage } from 'react-native';
+import { View, Text, AsyncStorage, StatusBar } from 'react-native';
 
 class AuthLoading extends Component {
 
@@ -9,14 +9,14 @@ class AuthLoading extends Component {
    }
 
    _bootstrapAsync = async () => {
-      const userToken = await AsyncStorage.getItem('userToken');
+      const isLogin = await AsyncStorage.getItem('isLogin');
 
-      this.props.navigation.navigate(userToken === 'test' ? 'App' : 'Auth');
+      this.props.navigation.navigate(isLogin === 'true' ? 'App' : 'Auth');
    }
 
    render() {
       return (
-         <View>
+         <View style={{ marginTop: StatusBar.currentHeight }}>
             <Text>Loading</Text>
          </View>  
       );

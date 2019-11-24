@@ -39,7 +39,6 @@ const styles = StyleSheet.create({
       borderTopWidth: 1
    },
    pointTable: {
-      flex: 1,
       borderWidth: 2,
       borderColor: 'rgb(139,174,253)',
       borderRadius: 10,

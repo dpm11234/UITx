@@ -9,6 +9,7 @@ import Deadline from '../Deadline';
 import Profile from '../Profile';
 import Notification from '../Notification';
 import Class from '../Class';
+import Setting from '../Setting';
 
 const ScheduleStack = createStackNavigator({
   Schedule: { screen: Schedule },
@@ -24,6 +25,7 @@ const NotificationStack = createStackNavigator({
 
 const ProfileStack = createStackNavigator({
   Profile: { screen: Profile },
+  Setting: { screen: Setting }
 });
 
 const ClassStack = createStackNavigator({

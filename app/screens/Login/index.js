@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, ImageBackground, Text, TextInput, TouchableOpacity, AsyncStorage } from 'react-native';
+import { StyleSheet, View, ImageBackground, Text, TextInput, TouchableOpacity, AsyncStorage, Platform } from 'react-native';
+import services from '../../services';
 
 class Login extends Component {
 
@@ -7,9 +8,26 @@ class Login extends Component {
       header: null,
    };
 
+   constructor(props) {
+      super(props);
+      this.state = {
+         isLogin: false,
+         user: {
+            studentId: '',
+            password: ''
+         }
+      }
+   }
+
    _signInAsync = async () => {
-      await AsyncStorage.setItem('userToken', 'test');
-      this.props.navigation.navigate('App');
+      const response = await services.login(this.state.user);
+      console.log(response);
+      if(response.success) {
+         this.setState({ isLogin: true });
+         await AsyncStorage.setItem('isLogin', 'true');
+         this.props.navigation.navigate('App');
+      }
+
    }
 
 
@@ -36,12 +54,14 @@ class Login extends Component {
                         style={styles.textInput}
                         placeholder="MSSV"
                         placeholderTextColor="#b3b3b3"
+                        onChangeText={(studentId) => this.setState({ user: { ...this.state.user, studentId } })}
                      />
 
                      <TextInput
                         style={styles.textInput}
                         placeholder="Mật Khẩu"
                         placeholderTextColor="#b3b3b3"
+                        onChangeText={(password) => this.setState({ user: { ...this.state.user, password } })}
                      />
 
                      <TouchableOpacity
