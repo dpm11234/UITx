@@ -7,7 +7,8 @@ import {
    Image,
    ScrollView,
    Switch,
-   Picker
+   Picker,
+   AsyncStorage
 } from 'react-native';
 
 class Setting extends Component {
@@ -55,6 +56,7 @@ class Setting extends Component {
          notifyDeadline: true,
          notifyComment: true,
          notifyDeadlineExpired: true,
+         time: '6h'
       }
    }
 
@@ -86,6 +88,11 @@ class Setting extends Component {
          ...this.state,
          notifyDeadlineExpired: !this.state.notifyDeadlineExpired
       })
+   }
+
+   toggleLogout = () => {
+      AsyncStorage.removeItem('isLogin');
+      this.props.navigation.navigate('login');
    }
 
    render() {
@@ -120,16 +127,21 @@ class Setting extends Component {
                <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
                   <Text style={{ fontSize: 18 }}>Báo hết hạn trước</Text>
                   <Picker
-                     selectedValue="6h"
+                     selectedValue={this.state.time}
                      style={{
                         height: 20,
                         width: 100,
-                        backgroundColor: 'black'
+                     }}
+                     onValueChange={(value) => {
+                        this.setState({
+                           ...this.state,
+                           time: value
+                        })
                      }}
                   >
                      <Picker.Item label="6 giờ" value="6h" />
-                     <Picker.Item label="6 giờ" value="6s" />
-                     <Picker.Item label="6 giờ" value="6m" />
+                     <Picker.Item label="5 giờ" value="5h" />
+                     <Picker.Item label="4 giờ" value="4h" />
                   </Picker>
                </View>
                <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
@@ -142,7 +154,9 @@ class Setting extends Component {
             </View>
 
             <View style={{ alignItems: 'center', marginTop: 50 }}>
-               <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center' }}>
+               <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center' }}
+                  onPress={ () => { this.toggleLogout() } }
+               >
                   <Image
                      source={require('../../../assets/images/logout.png')}
                      style={{ width: 30, height: 30 }}

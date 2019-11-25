@@ -18,7 +18,7 @@ class SubjectCard extends Component {
             <Text
               style={{
                 color: "#ffffff",
-                fontSize: 20,
+                fontSize: 18,
                 fontWeight: "bold"
               }}
             >
@@ -47,7 +47,7 @@ class SubjectCard extends Component {
             >
               <Text
                 style={{
-                  fontSize: 20,
+                  fontSize: 16,
                   flex: 80,
                   color: "rgb(154, 163, 176)",
                   textAlign: "center"
@@ -68,7 +68,7 @@ class SubjectCard extends Component {
                 <Text
                   style={{
                     color: "#ffffff",
-                    fontSize: 18,
+                    fontSize: 16,
                     fontWeight: "bold",
                     textAlign: "center"
                   }}
@@ -86,7 +86,7 @@ class SubjectCard extends Component {
             >
               <Text
                 style={{
-                  fontSize: 22,
+                  fontSize: 18,
                   textAlign: "center",
                   color: "rgb(75, 80, 93)"
                 }}

@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
+import DeadlineCard from '../DeadlineCard';
 
-import SubjectCard from '../SubjectCard';
-
-class CalendarLine extends Component {
+class DateDeadline extends Component {
    render() {
       return (
          <View style={{ flex: 1, flexDirection: 'row', marginHorizontal: 10 }}>
@@ -16,22 +15,22 @@ class CalendarLine extends Component {
                      09
                   </Text>
                </View>
-               <View style={{ position: 'absolute', right: -8, transform: [{translateX: -0.5}], width: 15, height: 15, backgroundColor: 'white', borderWidth: 2, borderRadius: 20 }}>
+               <View style={{ position: 'absolute', right: -8, transform: [{ translateX: -0.5 }], width: 15, height: 15, backgroundColor: 'white', borderWidth: 2, borderRadius: 20 }}>
                </View>
             </View>
             <View style={{ flex: 75 }}>
-               <View style={{ flex: 1, marginLeft: 15, borderBottomColor: 'rgb(154, 163, 176)', borderBottomWidth: 1 }}> 
-                     <View style={{ flex: 1, marginVertical: 15 }}>
-                        <SubjectCard />
-                     </View>
-                     <View style={{ flex: 1, marginVertical: 15 }}>
-                        <SubjectCard />
-                     </View>
+               <View style={{ flex: 1, marginLeft: 15, borderBottomColor: 'rgb(154, 163, 176)', borderBottomWidth: 1 }}>
+                  <View style={{ flex: 1, marginVertical: 15 }}>
+                     <DeadlineCard />
+                  </View>
+                  <View style={{ flex: 1, marginVertical: 15 }}>
+                     <DeadlineCard />
                   </View>
                </View>
+            </View>
          </View>
       );
    }
 }
 
-export default CalendarLine;
+export default DateDeadline;

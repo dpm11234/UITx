@@ -34,8 +34,8 @@ const ClassStack = createStackNavigator({
 
 const Home = createBottomTabNavigator(
   {
-    Class: { screen: ClassStack },
     Deadline: { screen: DeadlineStack },
+    Class: { screen: ClassStack },
     Notification: { screen: NotificationStack },
     Profile: {
       screen: ProfileStack,

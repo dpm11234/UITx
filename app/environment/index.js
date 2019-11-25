@@ -1,5 +1,5 @@
 const env = {
-   url: 'http://192.168.43.90:8000/api/v1'
+   url: 'http://10.80.254.140:8000/api/v1'
 };
 
 export default env;

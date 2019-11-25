@@ -11,7 +11,7 @@ class Login extends Component {
    constructor(props) {
       super(props);
       this.state = {
-         isLogin: false,
+         isLogin: null,
          user: {
             studentId: '',
             password: ''
@@ -28,6 +28,7 @@ class Login extends Component {
          this.props.navigation.navigate('App');
       }
 
+      this.setState({isLogin: false});
    }
 
 
@@ -50,6 +51,9 @@ class Login extends Component {
                      Vui lòng đăng nhập để tiếp tục
                   </Text>
                   <View style={{ width: '80%', marginVertical: 20 }}>
+                     <View>
+                        <Text style={{ fontSize: 20, color: '#c8747e' }}>Đăng nhập thất bại</Text>
+                     </View>
                      <TextInput
                         style={styles.textInput}
                         placeholder="MSSV"
