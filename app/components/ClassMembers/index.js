@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
-
+import env from '../../environment';
 class ClassMembers extends Component {
 
    render() {
+
+      let studentId = this.props.studentId ? this.props.studentId : ''
+
       return (
          <View>
             <View style={{ width: '100%', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
@@ -27,7 +30,7 @@ class ClassMembers extends Component {
             <View>
                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                   <Image
-                     source={require('../../../assets/images/avatar01.jpg')}
+                     source={{ uri: `${env.domain}/images/user/17520739.jpg` }}
                      style={{ width: 60, height: 60, borderRadius: 30, marginRight: 15 }}
                   />
                   <View>

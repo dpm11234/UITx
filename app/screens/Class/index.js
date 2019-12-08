@@ -42,7 +42,8 @@ class Class extends Component {
         marginTop: 5
       },
       component: <ClassMembers />,
-      schedule: []
+      schedule: [],
+      studentId: ''
     };
     this.loadSchedule();
   }
@@ -109,14 +110,14 @@ class Class extends Component {
         />
         <View style={{ paddingHorizontal: "7%" }}>
           <Text style={{ fontSize: 25 }}>
-            Lập trình Java - <Text style={{ fontSize: 18 }}> IS210.K11</Text>
+            Kho dữ liệu và OLAP - <Text style={{ fontSize: 18 }}> IS217.K12 </Text>
           </Text>
           <View style={{ flexDirection: "row", marginVertical: 10 }}>
             <Text style={{ fontSize: 16, flex: 30 }}>Giảng viên</Text>
             <View style={{ flex: 70 }}>
-              <Text style={{ fontSize: 16 }}>- Vũ Minh Sang</Text>
+              <Text style={{ fontSize: 16 }}>- Đỗ Thị Minh Phụng</Text>
               <Text style={{ fontSize: 16, marginTop: 5 }}>
-                - Vũ Minh Sang (thực hành)
+                - Đỗ Thị Minh Phụng (thực hành)
               </Text>
             </View>
           </View>
@@ -124,10 +125,7 @@ class Class extends Component {
             <Text style={{ fontSize: 16, flex: 30 }}>Lịch học</Text>
             <View style={{ flex: 70 }}>
               <Text style={{ fontSize: 16 }}>
-                - Thứ 3, tiết 1, 2, 3 (phòng C212)
-              </Text>
-              <Text style={{ fontSize: 16, marginTop: 5 }}>
-                - Thứ 3, tiết 1, 2, 3 (thực hành - phòng C212)
+                - Thứ 6, tiết 6, 7, 8 (phòng C212)
               </Text>
             </View>
           </View>

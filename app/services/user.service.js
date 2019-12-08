@@ -16,6 +16,17 @@ const login = async (user) => {
 
 }
 
+const getUser = async (studentId) => {
+   
+   const response = await axios({
+      method: 'GET',
+      url: `${env.url}/users/${studentId}`,
+   });
+
+   return response;
+
+}
+
 const loadData = async (user) => {
 
    const response = await axios({
@@ -33,5 +44,6 @@ const loadData = async (user) => {
 
 module.exports = {
    login,
-   loadData
+   loadData,
+   getUser
 }

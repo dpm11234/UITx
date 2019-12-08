@@ -7,7 +7,7 @@ import {
   TextInput,
   TouchableOpacity,
   AsyncStorage,
-  Platform,
+  Image,
   StatusBar
 } from "react-native";
 import { userService } from "../../services";
@@ -24,26 +24,40 @@ class Login extends Component {
       user: {
         studentId: "",
         password: ""
-      }
+      },
+      loggingIn: null,
+      loadingData: null
     };
   }
 
   _signInAsync = async () => {
     const user = this.state.user;
+    this.setState({
+      ...this.state,
+      loggingIn: true
+    });
+    try {
+      const response = await userService.login(user);
+    
+      if (response.isLogin) {
+        this.setState({ isLogin: true, loggingIn: false });
+        await AsyncStorage.setItem("isLogin", "true");
+        await AsyncStorage.setItem("studentId", this.state.user.studentId);
 
-    const response = await userService.login(user);
-
-    if (response.isLogin) {
-      this.setState({ isLogin: true });
-      await AsyncStorage.setItem("isLogin", "true");
-      await AsyncStorage.setItem("studentId", this.state.user.studentId);
-
-      const data = await userService.loadData(user);
-      this.props.navigation.navigate("App");
-      return;
+        const data = await userService.loadData(user);
+        if(data.isCrawl) {
+          this.setState({ ...this.state, loadData: false });
+        }
+        this.props.navigation.navigate("App");
+        return;
+      } else {
+        this.setState({ ...this.state, loggingIn: false, isLogin: false })
+      }
+    } catch (err) {
+      console.log(err);
     }
 
-    this.setState({ isLogin: false });
+    this.setState({ ...this.state, loggingIn: false, isLogin: false });
   };
 
   render() {
@@ -52,18 +66,39 @@ class Login extends Component {
         {this.state.isLogin ? (
           <View
             style={{
-              backgroundColor: "rgba(0, 0, 0, 0.3)",
+              backgroundColor: "rgba(0, 0, 0, 0.6)",
               height: "100%",
               width: "100%",
               position: "absolute",
-              zIndex: 100
+              zIndex: 100,
+              alignItems: 'center',
+              justifyContent: 'center'
             }}
           >
-            <Text>Loading Data...</Text>
+            <Image style={{ width: 150, height: 150 }} source={require('../../../assets/loading-data.gif')} />
+            <Text style={{ fontSize: 30, color: "#4db8ff" }}>Đang tải dữ liệu</Text>
           </View>
         ) : (
-          <View></View>
-        )}
+            <View></View>
+          )}
+        {this.state.loggingIn === true ? (
+          <View
+            style={{
+              backgroundColor: "rgba(0, 0, 0, 0.6)",
+              height: "100%",
+              width: "100%",
+              position: "absolute",
+              zIndex: 100,
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
+          >
+            <Image style={{ width: 150, height: 150 }} source={require("../../../assets/logging-in.gif")} />
+            <Text style={{ fontSize: 30, color: "#4db8ff" }}>Đang đăng nhập</Text>
+          </View>
+        ) : (
+            <View></View>
+          )}
         <View style={{ flex: 30 }}>
           <ImageBackground
             source={require("../../../assets/images/bg-login.jpg")}
@@ -89,11 +124,24 @@ class Login extends Component {
               Vui lòng đăng nhập để tiếp tục
             </Text>
             <View style={{ width: "80%", marginVertical: 20 }}>
-              <View>
-                <Text style={{ fontSize: 20, color: "#c8747e" }}>
-                  Đăng nhập thất bại
-                </Text>
-              </View>
+              {this.state.isLogin === false ? (
+                <View style={{ paddingHorizontal: 25 }}>
+                  <Text style={{ fontSize: 20, color: "#c8747e" }}>
+                    Đăng nhập thất bại
+                  </Text>
+                </View>
+              ) : (
+                  <View></View>
+                )}
+                {this.state.loadingData === false ? (
+                  <View style={{ paddingHorizontal: 25 }}>
+                    <Text style={{ fontSize: 20, color: "#c8747e" }}>
+                      Tải dữ liệu thất
+                    </Text>
+                  </View>
+                ) : (
+                    <View></View>
+                  )}
               <TextInput
                 style={styles.textInput}
                 placeholder="MSSV"
@@ -107,6 +155,8 @@ class Login extends Component {
                 style={styles.textInput}
                 placeholder="Mật Khẩu"
                 placeholderTextColor="#b3b3b3"
+                // keyboardType="visible-password"
+                secureTextEntry={true}
                 onChangeText={password =>
                   this.setState({ user: { ...this.state.user, password } })
                 }

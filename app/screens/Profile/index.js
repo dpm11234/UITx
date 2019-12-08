@@ -1,5 +1,3 @@
-/* eslint-disable prettier/prettier */
-/* eslint-disable react-native/no-inline-styles */
 import React, { Component } from 'react';
 import { View, Text, Image, TouchableOpacity, ScrollView, StatusBar, AsyncStorage } from 'react-native';
 import { FontAwesome } from 'react-native-vector-icons';
@@ -9,7 +7,7 @@ import FeeInfo from '../../components/FeeInfo';
 import ExamSchedule from '../../components/ExamSchedule';
 import SchemeTraining from '../../components/SchemeTraining';
 import Header from '../../components/Header';
-import { pointService } from '../../services';
+import { pointService, userService } from '../../services';
 import env from '../../environment';
 
 class Profile extends Component {
@@ -62,10 +60,33 @@ class Profile extends Component {
           creditsAccumulated: 0,
           creditsLearned: 0
         }
+      },
+      studentId: null,
+      userProfile: {
+        faculty: '',
+        fullname: '',
+        studentId: '',
+        trainingPoint: 0
       }
     };
 
     this.getPoint();
+    this.getUserProfile();
+  }
+
+  getUserProfile = async () => {
+    const studentId = await AsyncStorage.getItem('studentId');
+    this.setState({
+      ...this.state,
+      studentId
+    }, async () => {
+      const response = await userService.getUser(this.state.studentId);
+      let userProfile = response.data.user;
+      this.setState({
+        ...this.state,
+        userProfile
+      });
+    });
   }
 
   getPoint = async () => {
@@ -75,12 +96,26 @@ class Profile extends Component {
       studentId
     }, async () => {
       const response = await pointService.getPoint(this.state.studentId);
-      // let schedule = response.data.schedule.schedule;
       let pointData = response.data;
-      this.setState({
-        ...this.state,
-        pointData
-      });
+      if (pointData) {
+        this.setState({
+          ...this.state,
+          pointData
+        });
+      } else {
+        this.setState({
+          ...this.state,
+          pointData: {
+            point: {
+              transcript: [],
+              averageTotal: 0,
+              creditsAccumulated: 0,
+              creditsLearned: 0
+            }
+          }
+        });
+      }
+
       this.renderComponent();
 
     });
@@ -92,7 +127,7 @@ class Profile extends Component {
 
     switch (typeNavigate) {
       case 'tablePoint':
-        component = <TablePoint point={this.state.pointData.point.transcript} />;
+        component = <TablePoint point={this.state.pointData.point ? this.state.pointData.point.transcript : []} />;
         break;
       case 'feeInfo':
         component = <FeeInfo />;
@@ -113,10 +148,15 @@ class Profile extends Component {
 
   render() {
 
-    // let averageTotal = this.state.pointData.point.averageTotal ? this.state.pointData.point.averageTotal : '';
+    let faculty = '';
 
+    switch (this.state.userProfile.faculty) {
+      case 'HTTT':
+        faculty = 'Hệ thống thông tin'
+        break;
+    }
+    console.log(faculty);
 
-    console.log(`${env.domain}/images/user/${this.state.studentId}.jpg`)
     return (
       <ScrollView style={{ marginTop: 15 }} showsVerticalScrollIndicator={false}>
         <View style={{ flex: 0, marginHorizontal: 15 }}>
@@ -139,14 +179,14 @@ class Profile extends Component {
               >
                 <View style={{ width: '100%', flex: 1 }}>
                   <Text style={{ fontSize: 20, fontWeight: 'bold' }}>
-                    Dương Phước Mậu
-              </Text>
+                    {this.state.userProfile.fullname}
+                  </Text>
                 </View>
                 <View style={{ flex: 1 }}>
-                  <Text style={{ fontSize: 17 }}>17520739</Text>
+                  <Text style={{ fontSize: 17 }}>{this.state.userProfile.studentId}</Text>
                 </View>
                 <View style={{ flex: 1 }}>
-                  <Text style={{ fontSize: 17 }}>Hệ thống thông tin 2017</Text>
+                  <Text style={{ fontSize: 17 }}>{faculty}</Text>
                 </View>
                 <View
                   style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}
@@ -201,7 +241,9 @@ class Profile extends Component {
                     fontWeight: 'bold'
                   }}
                 >
-                  {this.state.pointData.point.averageTotal}
+                  {
+                    this.state.pointData.point.averageTotal
+                  }
                 </Text>
                 <Text style={{ textAlign: 'center', fontSize: 15 }}>Điểm TB</Text>
               </View>
@@ -227,8 +269,8 @@ class Profile extends Component {
                     fontWeight: 'bold'
                   }}
                 >
-                  87
-            </Text>
+                  {this.state.userProfile.trainingPoint}
+                </Text>
                 <Text style={{ textAlign: 'center', fontSize: 15 }}>
                   Điểm rèn luyện
             </Text>

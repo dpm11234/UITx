@@ -14,7 +14,9 @@ class TablePoint extends Component {
             <View style={styles.container} key={index} >
                <View style={{ flex: 1 }} >
                   <View>
-                     <Text style={styles.termTitle}>Học kì {term.termId} ({term.termId})</Text>
+                     <Text style={styles.termTitle}>
+                        Học kì {term.termId.charAt(0)} ({term.termId.slice(1, 5) + ' - ' + term.termId.slice(5, 9)})
+                     </Text>
                      {
                         term.pointSubject.map((item, index) => {
                            return <View style={styles.container} key={index}>

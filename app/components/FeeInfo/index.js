@@ -23,7 +23,7 @@ class FeeInfo extends Component {
         studentId
       }, async () => {
         const response = await tuitionService.getTuition(this.state.studentId);
-        let tuitions = response.data.tuition.term;
+        let tuitions = response.data.tuition ? response.data.tuition.term : [];
         this.setState({
           ...this.state,
           tuitions
@@ -33,14 +33,20 @@ class FeeInfo extends Component {
     }
 
    render() {
+      let elements = [];
+      if(this.state.tuitions) {
+        elements = this.state.tuitions.map((tuition, index) => {
+            return (
+               <View key={index}>
+                  <FeeCard tuition={tuition} />
+               </View>
+            )
+         })
+      } else {
+         <View></View>
+      }
 
-      const elements = this.state.tuitions.map((tuition, index) => {
-         return (
-            <View key={index}>
-               <FeeCard tuition={tuition} />
-            </View>
-         )
-      })
+      
 
       return (
          <View>
