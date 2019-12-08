@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { View, Text, ScrollView, AsyncStorage } from "react-native";
 import ListCalendarLine from "../../components/ListCalendarLines";
-import CalendarStrip from "react-native-calendar-strip";
 import Header from '../../components/Header';
 import { scheduleService } from '../../services'
 
