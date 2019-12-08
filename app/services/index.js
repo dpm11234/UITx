@@ -1,25 +1,11 @@
-import env from '../environment';
-
-const login = async (user) => {
-
-   console.log(user);
-
-   const response = await fetch(env.url + '/users/login', {
-      method: 'POST',
-      headers: {
-         'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-         studentId: user.studentId,
-         password: user.password
-      })
-   });
-
-   return await response.json();
-
-}
-
+import userService from './user.service';
+import scheduleService from './schedule.service';
+import pointService from './point.service';
+import tuitionService from './tuition.service';
 
 module.exports = {
-   login
+   userService,
+   scheduleService,
+   pointService,
+   tuitionService
 }

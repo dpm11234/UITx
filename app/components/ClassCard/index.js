@@ -1,12 +1,15 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable prettier/prettier */
 
-import React, {Component} from 'react';
-import {View, Text, Image, Dimensions, Platform} from 'react-native';
-import {FontAwesome} from 'react-native-vector-icons';
+import React, { Component } from 'react';
+import { View, Text, Image, Dimensions, Platform } from 'react-native';
+import { FontAwesome } from 'react-native-vector-icons';
 
 class ClassCard extends Component {
   render() {
+
+    const { course } = this.props;
+
     return (
       <View
         style={{
@@ -16,22 +19,25 @@ class ClassCard extends Component {
           borderRadius: 20,
           borderColor: 'rgba(0, 0, 0, 0)',
         }}>
-        <View style={{padding: 8}}>
+        <View style={{ padding: 16 }}>
           <Text
             style={{
               textAlign: 'center',
-              fontSize: 24,
+              fontSize: 18,
               fontWeight: '500',
               marginBottom: 7,
-            }}>
-            Lập Trình Java
+            }}
+            numberOfLines={1}
+            ellipsizeMode='tail'
+          >
+            {course.className}
           </Text>
 
-          <View style={{flex: 0, flexDirection: 'row', marginHorizontal: 7}}>
+          <View style={{ flex: 0, flexDirection: 'row', marginHorizontal: 7 }}>
             <View
-              style={{flex: 50, flexDirection: 'row', alignItems: 'center'}}>
-              
-              <Text style={{fontSize: 16, marginLeft: 5}}>3 DeadLine</Text>
+              style={{ flex: 50, flexDirection: 'row', alignItems: 'center' }}>
+
+              <Text style={{ fontSize: 16, marginLeft: 5 }}>3 DeadLine</Text>
             </View>
             <View
               style={{
@@ -40,12 +46,12 @@ class ClassCard extends Component {
                 alignItems: 'center',
                 justifyContent: 'flex-end',
               }}>
-              
-              <Text style={{fontSize: 16, marginLeft: 5}}>7 Thảo Luận</Text>
+
+              <Text style={{ fontSize: 16, marginLeft: 5 }}>7 Thảo Luận</Text>
             </View>
           </View>
 
-          <View style={{flex: 0, flexDirection: 'row', marginTop: 10}}>
+          <View style={{ flex: 0, flexDirection: 'row', marginTop: 10 }}>
             <View
               style={{
                 flex: 50,
@@ -115,7 +121,7 @@ class ClassCard extends Component {
                 justifyContent: 'center',
                 alignItems: 'center',
               }}>
-              <Text style={{fontSize: 16}}>120 Thành Viên</Text>
+              <Text style={{ fontSize: 16 }}>120 Thành Viên</Text>
             </View>
           </View>
         </View>

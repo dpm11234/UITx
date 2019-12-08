@@ -6,7 +6,7 @@ import NotificationsCard from '../../components/NotificationsCard';
 class ListNotifications extends Component {
    render() {
       return (
-         <ScrollView>
+         <ScrollView showsVerticalScrollIndicator={false}>
             <View style={{ marginBottom: 20 }}>
                <NotificationsCard />
             </View>

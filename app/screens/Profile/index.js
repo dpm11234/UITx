@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable react-native/no-inline-styles */
 import React, { Component } from 'react';
-import { View, Text, Image, TouchableOpacity, ScrollView, StatusBar } from 'react-native';
+import { View, Text, Image, TouchableOpacity, ScrollView, StatusBar, AsyncStorage } from 'react-native';
 import { FontAwesome } from 'react-native-vector-icons';
 
 import TablePoint from '../../components/TablePoint';
@@ -9,7 +9,8 @@ import FeeInfo from '../../components/FeeInfo';
 import ExamSchedule from '../../components/ExamSchedule';
 import SchemeTraining from '../../components/SchemeTraining';
 import Header from '../../components/Header';
-
+import { pointService } from '../../services';
+import env from '../../environment';
 
 class Profile extends Component {
 
@@ -47,22 +48,51 @@ class Profile extends Component {
     };
   };
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       activeButton: '#8BAEFD',
       typeNavigate: 'tablePoint',
       component: <TablePoint />,
       icon: 'calendar-focus',
+      pointData: {
+        point: {
+          transcript: [],
+          averageTotal: 0,
+          creditsAccumulated: 0,
+          creditsLearned: 0
+        }
+      }
     };
+
+    this.getPoint();
   }
 
-  renderComponent = (typeNavigate) => {
+  getPoint = async () => {
+    const studentId = await AsyncStorage.getItem('studentId');
+    this.setState({
+      ...this.state,
+      studentId
+    }, async () => {
+      const response = await pointService.getPoint(this.state.studentId);
+      // let schedule = response.data.schedule.schedule;
+      let pointData = response.data;
+      this.setState({
+        ...this.state,
+        pointData
+      });
+      this.renderComponent();
+
+    });
+  }
+
+  renderComponent = (typeNavigate = 'tablePoint') => {
 
     let component = <View></View>
+
     switch (typeNavigate) {
       case 'tablePoint':
-        component = <TablePoint />;
+        component = <TablePoint point={this.state.pointData.point.transcript} />;
         break;
       case 'feeInfo':
         component = <FeeInfo />;
@@ -82,6 +112,11 @@ class Profile extends Component {
   }
 
   render() {
+
+    // let averageTotal = this.state.pointData.point.averageTotal ? this.state.pointData.point.averageTotal : '';
+
+
+    console.log(`${env.domain}/images/user/${this.state.studentId}.jpg`)
     return (
       <ScrollView style={{ marginTop: 15 }} showsVerticalScrollIndicator={false}>
         <View style={{ flex: 0, marginHorizontal: 15 }}>
@@ -91,7 +126,7 @@ class Profile extends Component {
                 <Image
                   style={{ width: 100, height: 100, borderRadius: 50 }}
                   source={{
-                    uri: 'https://interactive-examples.mdn.mozilla.net/media/examples/grapefruit-slice-332-332.jpg'
+                    uri: `${env.domain}/images/user/${this.state.studentId}.jpg`
                   }}
                 />
               </View>
@@ -166,8 +201,8 @@ class Profile extends Component {
                     fontWeight: 'bold'
                   }}
                 >
-                  7.9
-            </Text>
+                  {this.state.pointData.point.averageTotal}
+                </Text>
                 <Text style={{ textAlign: 'center', fontSize: 15 }}>Điểm TB</Text>
               </View>
               <View style={{ flex: 30 }}>
@@ -178,7 +213,7 @@ class Profile extends Component {
                     fontWeight: 'bold'
                   }}
                 >
-                  58%
+                  50%
             </Text>
                 <Text style={{ textAlign: 'center', fontSize: 15 }}>
                   Tiến độ tốt nghiệp

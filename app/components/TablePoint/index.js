@@ -3,109 +3,48 @@ import { View, Text } from "react-native";
 
 import styles from './style';
 
-const data = [
-   {
-      term: {
-         term: 'I',
-         year: '2018 - 2019'
-      },
-      courses: [
-         {
-            name: 'Lập trình java',
-            qt: 9,
-            gk: 9,
-            th: 9,
-            ck: 9
-         },
-         {
-            name: 'Lập trình java 1',
-            qt: 9,
-            gk: 9,
-            th: 9,
-            ck: 9
-         },
-         {
-            name: 'Lập trình java 2',
-            qt: 9,
-            gk: 9,
-            th: 9,
-            ck: 9
-         }
-      ],
-      dtb: 9
-   },
-   {
-      term: {
-         term: 'I',
-         year: '2018 - 2029'
-      },
-      courses: [
-         {
-            name: 'Lập trình java',
-            qt: 9,
-            gk: 9,
-            th: 9,
-            ck: 9
-         },
-         {
-            name: 'Lập trình java 1',
-            qt: 9,
-            gk: 9,
-            th: 9,
-            ck: 9
-         },
-         {
-            name: 'Lập trình java 2',
-            qt: 9,
-            gk: 9,
-            th: 9,
-            ck: 9
-         }
-      ],
-      dtb: 9
-   }
-]
-
 class TablePoint extends Component {
 
    render() {
 
-      const renderTerm = data.map((item, index) => {
+      let points = this.props.point ? this.props.point : [];
+
+      const renderTerm = points.map((term, index) => {
          return (
             <View style={styles.container} key={index} >
                <View style={{ flex: 1 }} >
                   <View>
-                     <Text style={styles.termTitle}>Học kì {item.term.term} ({item.term.year})</Text>
+                     <Text style={styles.termTitle}>Học kì {term.termId} ({term.termId})</Text>
                      {
-                        item.courses.map((item, index) => {
+                        term.pointSubject.map((item, index) => {
                            return <View style={styles.container} key={index}>
                               <View style={styles.courseName} >
-                                 <Text style={{ fontSize: 17 }}>{item.name}</Text>
+                                 <Text style={{ fontSize: 17 }}>{item.subjectName}</Text>
                               </View>
 
                               <View style={{ flex: 47, flexDirection: "row" }}>
                                  <View style={styles.coursePoint} >
                                     <Text style={{ textAlign: "center", fontSize: 16 }} >
-                                       9
+                                       {item.processScore}
                                     </Text>
                                  </View>
                                  <View style={styles.coursePoint} >
                                     <Text style={{ textAlign: "center", fontSize: 16 }} >
-                                       9
+                                       {item.midTermScore}
                                  </Text>
                                  </View>
                                  <View
                                  style={styles.coursePoint}
                                  >
                                     <Text style={{ textAlign: "center", fontSize: 16 }}>
-                                       9
+                                       {item.practiceScore}
                                     </Text>
                                  </View>
                                  <View
                                  style={styles.coursePoint}
                                  >
                                     <Text style={{ textAlign: "center", fontSize: 16 }} >
-                                       9
+                                       {item.endTermScore}
                                     </Text>
                                  </View>
                                  <View
@@ -117,7 +56,7 @@ class TablePoint extends Component {
                                     }}
                                  >
                                     <Text style={{ textAlign: "center", fontSize: 16 }} >
-                                       9
+                                       {item.termScore}
                                     </Text>
                                  </View>
                               </View>
@@ -126,7 +65,7 @@ class TablePoint extends Component {
                      }
                      <View style={styles.averageRow}>
                         <Text style={{ fontSize: 17 }}>Trung bình</Text>
-                        <Text style={{ fontSize: 17 }}>9</Text>
+                        <Text style={{ fontSize: 17 }}>{ term.average }</Text>
                      </View>
                   </View>
             </View>

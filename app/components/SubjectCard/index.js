@@ -3,16 +3,23 @@ import { StyleSheet, View, Text } from "react-native";
 
 class SubjectCard extends Component {
   render() {
+
+    const { color } = this.props;
+
     const renderLesson = () => {
-      let numLessons = 2;
+      let numLessons = Array.from(this.props.course.lesson);
       let lessons = [];
-      for (let i = 0; i < numLessons; i++) {
+      for (let i = 0; i < numLessons.length; i++) {
         lessons.push(
           <View
             key={i}
             style={[
               styles.lesson,
-              { paddingVertical: 10, marginTop: i == 0 ? 0 : 3 }
+              {
+                paddingVertical: 10,
+                marginTop: i == 0 ? 0 : 3,
+                backgroundColor: color
+              }
             ]}
           >
             <Text
@@ -22,7 +29,7 @@ class SubjectCard extends Component {
                 fontWeight: "bold"
               }}
             >
-              {i + 1}
+              {numLessons[i]}
             </Text>
           </View>
         );
@@ -32,7 +39,7 @@ class SubjectCard extends Component {
     };
 
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, {borderColor: color}]}>
         <View style={{ width: "15%" }}>{renderLesson()}</View>
         <View style={{ flex: 1, flexDirection: "row" }}>
           <View style={{ flex: 1 }}>
@@ -73,7 +80,7 @@ class SubjectCard extends Component {
                     textAlign: "center"
                   }}
                 >
-                  B4.09
+                  {this.props.course.classRoom}
                 </Text>
               </View>
             </View>
@@ -91,7 +98,7 @@ class SubjectCard extends Component {
                   color: "rgb(75, 80, 93)"
                 }}
               >
-                Hoạch định nguồn lực doanh nghiệp
+                {`${this.props.course.className} (${this.props.course.teacher.teacherType})`}
               </Text>
             </View>
           </View>
@@ -107,7 +114,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     borderStyle: "solid",
     borderWidth: 2,
-    borderColor: "rgb(244, 189, 117)",
     borderRadius: 10,
     height: "100%"
   },
@@ -116,7 +122,6 @@ const styles = StyleSheet.create({
     height: "100%"
   },
   lesson: {
-    backgroundColor: "rgb(244, 189, 117)",
     flex: 0,
     alignItems: "center",
     justifyContent: "center"

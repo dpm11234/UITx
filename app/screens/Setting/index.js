@@ -91,8 +91,9 @@ class Setting extends Component {
    }
 
    toggleLogout = () => {
+
       AsyncStorage.removeItem('isLogin');
-      this.props.navigation.navigate('login');
+      this.props.navigation.navigate('Auth');
    }
 
    render() {

@@ -1,13 +1,12 @@
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import React, { Component } from 'react';
-import { View, Image } from 'react-native';
+import { View, Image, Text } from 'react-native';
 import { FontAwesome } from 'react-native-vector-icons';
 
 import Schedule from '../Schedule';
 import Deadline from '../Deadline';
 import Profile from '../Profile';
-import Notification from '../Notification';
 import Class from '../Class';
 import Setting from '../Setting';
 
@@ -17,10 +16,6 @@ const ScheduleStack = createStackNavigator({
 
 const DeadlineStack = createStackNavigator({
   Deadline: { screen: Deadline },
-});
-
-const NotificationStack = createStackNavigator({
-  Notification: { screen: Notification },
 });
 
 const ProfileStack = createStackNavigator({
@@ -34,9 +29,9 @@ const ClassStack = createStackNavigator({
 
 const Home = createBottomTabNavigator(
   {
+    Schedule: { screen: ScheduleStack },
     Deadline: { screen: DeadlineStack },
     Class: { screen: ClassStack },
-    Notification: { screen: NotificationStack },
     Profile: {
       screen: ProfileStack,
       navigationOptions: {
@@ -45,7 +40,6 @@ const Home = createBottomTabNavigator(
         },
       },
     },
-    Schedule: { screen: ScheduleStack },
   },
   {
     tabBarOptions: {
@@ -58,7 +52,7 @@ const Home = createBottomTabNavigator(
         switch (routeName) {
           case 'Schedule':
             return (
-              <Image source={require('../../../assets/images/calendar.png')}
+              <Image source={focused ? require('../../../assets/images/calendar-focus.png') : require('../../../assets/images/calendar.png')}
                 style={{
                   height: 20,
                   width: 20,
@@ -67,7 +61,7 @@ const Home = createBottomTabNavigator(
             );
           case 'Class':
             return (
-              <Image source={require('../../../assets/images/group.png')}
+              <Image source={focused ? require('../../../assets/images/group-focus.png') : require('../../../assets/images/group.png')}
                 style={{
                   height: 20,
                   width: 20,
@@ -76,7 +70,7 @@ const Home = createBottomTabNavigator(
             );
           case 'Deadline':
             return (
-              <Image source={require('../../../assets/images/clock.png')}
+              <Image source={focused ? require('../../../assets/images/fast-focus.png') : require('../../../assets/images/fast.png')}
                 style={{
                   height: 20,
                   width: 20,
@@ -92,6 +86,23 @@ const Home = createBottomTabNavigator(
                   width: 20,
                 }}
               />
+            );
+        }
+      },
+      tabBarLabel: ({ focused, tintColor }) => {
+        const { routeName } = navigation.state;
+        switch (routeName) {
+          case 'Schedule':
+            return (
+              <Text style={{ textAlign: 'center', color: `${ focused ? '#8BAEFD' : 'black' }` }}>Thời khóa biểu</Text>
+            );
+          case 'Class':
+            return (
+              <Text style={{ textAlign: 'center', color: `${ focused ? '#8BAEFD' : 'black' }` }}>Lớp</Text>
+            );
+          case 'Deadline':
+            return (
+              <Text style={{ textAlign: 'center', color: `${ focused ? '#8BAEFD' : 'black' }` }}>Deadline</Text>
             );
         }
       },

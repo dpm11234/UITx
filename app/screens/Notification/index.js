@@ -36,7 +36,7 @@ class Notification extends Component {
       return (
          <View style={{ marginHorizontal: 20 }}>
 
-            <View style={{ flex: 0, flexDirection: 'row', marginVertical: 25 }}>
+            <View style={{ flexDirection: 'row', marginVertical: 25 }}>
                <View style={{ flex: 1, flexDirection: 'row', borderRadius: 25, overflow: 'hidden', backgroundColor: 'rgb(227, 231, 237)' }}>
                   <TouchableOpacity
                      style={[

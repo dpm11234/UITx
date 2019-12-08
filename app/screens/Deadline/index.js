@@ -10,7 +10,7 @@ class Deadline extends Component {
       return {
          header: () => {
             return (
-               <Header navigation={navigation} />
+               <Header title="Deadline" navigation={navigation} />
             );
          }
       };
@@ -18,7 +18,7 @@ class Deadline extends Component {
 
    render() {
       return (
-         <ScrollView>
+         <ScrollView showsVerticalScrollIndicator={false} >
             <View>
                <Calendar />
             </View>

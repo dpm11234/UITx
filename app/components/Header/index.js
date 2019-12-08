@@ -1,23 +1,47 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable prettier/prettier */
 import React, { Component } from 'react';
-import {View, Text, StatusBar, TouchableOpacity, Image} from 'react-native';
-
+import {View, Text, StatusBar, TouchableOpacity, Image, AsyncStorage } from 'react-native';
+import env from '../../environment';
 class Header extends Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      studentId: null
+    }
+    this.getStudentId();
+  }
+
+  getStudentId = async () => {
+    const studentId = await AsyncStorage.getItem('studentId');
+    this.setState({ studentId });
+  }
+
    render() {
+      let bgColor = '#F6F8F9'
+      let titleColor = '#9BA3B1'
+      const { title, type } = this.props;
+
+      if(type === 'c') {
+        bgColor = '#8BAEFD';
+        titleColor = 'white';
+      }
+
       return (
          <View
             style={{
               flex: 0,
               flexDirection: 'row',
               paddingVertical: 10,
-              backgroundColor: 'rgb(139,174,253)',
+              backgroundColor: bgColor,
               marginTop: StatusBar.currentHeight
             }}
           >
             <View style={{ flex: 20 }}></View>
             <View style={{ flex: 60 }}>
-              <Text style={{ textAlign: 'center', fontSize: 26, color: 'white' }}>Lớp</Text>
+              <Text style={{ textAlign: 'center', fontSize: 26, color: titleColor }}>{title}</Text>
             </View>
             <View style={{ flex: 20, alignItems: 'flex-end' }}>
               <TouchableOpacity
@@ -25,7 +49,7 @@ class Header extends Component {
               >
                 <Image
                   source={{
-                    uri: 'https://image.shutterstock.com/image-photo/mountains-during-sunset-beautiful-natural-600w-407021107.jpg',
+                    uri: `${env.domain}/images/user/${this.state.studentId}.jpg`,
                   }}
                   style={{
                     height: 40,
