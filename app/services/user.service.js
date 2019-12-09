@@ -3,6 +3,8 @@ import axios from 'axios';
 
 const login = async (user) => {
 
+   console.log(`${env.url}/users/login-courses`);
+
    const response = await axios({
       method: 'POST',
       url: `${env.url}/users/login`,
@@ -42,8 +44,24 @@ const loadData = async (user) => {
 
 }
 
+const getDataCourses = async (user) => {
+
+   const response = await axios({
+      method: 'POST',
+      url: `${env.url}/users/login-courses`,
+      data: {
+         studentId: user.studentId,
+         password: user.password
+      }
+   });
+   
+   return response.data;
+
+}
+
 module.exports = {
    login,
    loadData,
-   getUser
+   getUser,
+   getDataCourses
 }

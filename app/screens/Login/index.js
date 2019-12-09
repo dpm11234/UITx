@@ -40,12 +40,17 @@ class Login extends Component {
       const response = await userService.login(user);
     
       if (response.isLogin) {
-        this.setState({ isLogin: true, loggingIn: false });
+        this.setState({ ...this.state, isLogin: true, loggingIn: false });
         await AsyncStorage.setItem("isLogin", "true");
         await AsyncStorage.setItem("studentId", this.state.user.studentId);
 
-        const data = await userService.loadData(user);
-        if(data.isCrawl) {
+        const responseLoginDaa = await userService.loadData(user);
+        const responseLoginCourse = await userService.getDataCourses(user);
+
+        console.log(responseLoginDaa);
+        console.log(responseLoginCourse);
+
+        if(responseLoginDaa.isCrawl && responseLoginCourse.isCrawl) {
           this.setState({ ...this.state, loadData: false });
         }
         this.props.navigation.navigate("App");
