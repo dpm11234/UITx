@@ -10,7 +10,20 @@ import {
   Image,
   StatusBar
 } from "react-native";
+import NodeRSA from 'node-rsa';
 import { userService } from "../../services";
+
+
+const publicKey = `
+-----BEGIN PUBLIC KEY-----
+MIGeMA0GCSqGSIb3DQEBAQUAA4GMADCBiAKBgGgcEm2J+JFQ4UCLKjKI5KSubzGX
+Cud3Wd+ylbV6gFr+RFLi9aIZOkuBg6s6eMu4LjPEa8bt6nWtoFRBvFTlzVVack/W
+VReRuwXgZzexWpQSeIFRlQxFhNYj+8GwvXA4ke0sx5x3J3qYu1UAPDEjhkrRqgtB
+heGGxWrw8aY52e2vAgMBAAE=
+-----END PUBLIC KEY-----
+`;
+
+let rsa = new NodeRSA(publicKey);
 
 class Login extends Component {
   static navigationOptions = {
@@ -32,7 +45,9 @@ class Login extends Component {
   }
 
   _signInAsync = async () => {
-    const user = this.state.user;
+    let user = this.state.user;
+    user.password = rsa.encrypt(user.password, 'base64');
+
     this.setState({
       ...this.state,
       loggingIn: true

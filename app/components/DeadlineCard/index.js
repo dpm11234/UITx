@@ -23,7 +23,7 @@ class DeadlineCard extends Component {
           style={{
             width: "100%",
             textAlign: "center",
-            fontSize: 24,
+            fontSize: 22,
             borderBottomColor: "black",
             borderBottomWidth: 1,
             paddingVertical: 5
@@ -42,26 +42,30 @@ class DeadlineCard extends Component {
             marginVertical: 10
           }}
         >
-          <TouchableOpacity
-            style={{
-              backgroundColor: "#D0CECE",
-              paddingHorizontal: 8,
-              paddingVertical: 5,
-              borderRadius: 5
-            }}
-          >
-            <Text style={{ fontSize: 20 }}>Nộp Bài</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={{
-              backgroundColor: "#D0CECE",
-              paddingHorizontal: 8,
-              paddingVertical: 5,
-              borderRadius: 5
-            }}
-          >
-            <Text style={{ fontSize: 20 }}>Mô Tả</Text>
-          </TouchableOpacity>
+          {
+            // (
+            //   <TouchableOpacity
+            //     style={{
+            //       backgroundColor: "#D0CECE",
+            //       paddingHorizontal: 8,
+            //       paddingVertical: 5,
+            //       borderRadius: 5
+            //     }}
+            //   >
+            //     <Text style={{ fontSize: 20 }}>Nộp Bài</Text>
+            //   </TouchableOpacity>
+            //   <TouchableOpacity
+            //     style={{
+            //       backgroundColor: "#D0CECE",
+            //       paddingHorizontal: 8,
+            //       paddingVertical: 5,
+            //       borderRadius: 5
+            //     }}
+            //   >
+            //     <Text style={{ fontSize: 20 }}>Mô Tả</Text>
+            //   </TouchableOpacity>
+            // )
+          }
         </View>
       </View>
     );

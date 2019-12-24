@@ -59,7 +59,7 @@ class SubjectCard extends Component {
                   textAlign: "center"
                 }}
               >
-                7h30 - 9h30
+               
               </Text>
               <View
                 style={{
