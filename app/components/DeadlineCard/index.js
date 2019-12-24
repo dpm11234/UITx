@@ -3,6 +3,10 @@ import { View, Text, TouchableOpacity } from "react-native";
 
 class DeadlineCard extends Component {
   render() {
+
+    let data = this.props.data ? this.props.data : {};
+    let className = this.props.className ? this.props.className : '';
+
     return (
       <View
         style={{
@@ -25,10 +29,10 @@ class DeadlineCard extends Component {
             paddingVertical: 5
           }}
         >
-          {this.props.title}
+          {className}
         </Text>
-        <Text style={{ fontSize: 18, paddingTop: 5 }}>
-          Hết hạn sau: 1 ngày, 2 giờ
+        <Text style={{ fontSize: 18, paddingTop: 5, textAlign: "center" }}>
+          Hết hạn sau: {data.statusInfo.remaining}
         </Text>
         <View
           style={{

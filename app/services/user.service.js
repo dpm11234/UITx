@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const login = async (user) => {
 
-   console.log(`${env.url}/users/login-courses`);
+   // console.log(`${env.url}/users/login-courses`);
 
    const response = await axios({
       method: 'POST',

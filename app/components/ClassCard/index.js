@@ -3,9 +3,34 @@
 
 import React, { Component } from 'react';
 import { View, Text, Image, Dimensions, Platform } from 'react-native';
-import { FontAwesome } from 'react-native-vector-icons';
+import { classService } from '../../services';
 
 class ClassCard extends Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      images: []
+    }
+
+    // this.getImage();
+  }
+
+  getImage = async () => {
+    let response = null;
+    let id = setInterval(async () => {
+      response = await classService.getParticipants(this.props.course.classId);
+      if(response) {
+        clearInterval(id);
+        let arr = response.data.participant;
+        this.setState({
+          images: [arr[0], arr[1], arr[2]]
+        })
+      }
+    }, 15000);
+  }
+
   render() {
 
     const { course } = this.props;
@@ -58,61 +83,6 @@ class ClassCard extends Component {
                 flexDirection: 'row',
                 justifyContent: 'center',
               }}>
-              <Image
-                source={{
-                  uri:
-                    'https://image.shutterstock.com/image-photo/mountains-during-sunset-beautiful-natural-600w-407021107.jpg',
-                }}
-                style={{
-                  width: 40,
-                  height: 40,
-                  borderRadius: 20,
-                  borderWidth: 2,
-                  borderColor: 'white',
-                }}
-              />
-              <Image
-                source={{
-                  uri:
-                    'https://image.shutterstock.com/image-photo/mountains-during-sunset-beautiful-natural-600w-407021107.jpg',
-                }}
-                style={{
-                  width: 40,
-                  height: 40,
-                  borderRadius: 20,
-                  marginLeft: -18,
-                  borderWidth: 2,
-                  borderColor: 'white',
-                }}
-              />
-              <Image
-                source={{
-                  uri:
-                    'https://image.shutterstock.com/image-photo/mountains-during-sunset-beautiful-natural-600w-407021107.jpg',
-                }}
-                style={{
-                  width: 40,
-                  height: 40,
-                  borderRadius: 20,
-                  marginLeft: -18,
-                  borderWidth: 2,
-                  borderColor: 'white',
-                }}
-              />
-              <Image
-                source={{
-                  uri:
-                    'https://image.shutterstock.com/image-photo/mountains-during-sunset-beautiful-natural-600w-407021107.jpg',
-                }}
-                style={{
-                  width: 40,
-                  height: 40,
-                  borderRadius: 20,
-                  marginLeft: -18,
-                  borderWidth: 2,
-                  borderColor: 'white',
-                }}
-              />
             </View>
             <View
               style={{

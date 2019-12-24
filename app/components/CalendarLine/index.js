@@ -22,10 +22,10 @@ class CalendarLine extends Component {
       if (indexCardColor > lengthCardColors - 1 || index > indexCardColor) {
         indexCardColor = 0;
       }
-
+      let rand = Math.floor(Math.random() * (6 - 0) + 0);
       return (
         <View key={index} style={{ flex: 1, marginVertical: 15 }}>
-          <SubjectCard course={course} color={cardColors[indexCardColor++]} />
+          <SubjectCard course={course} color={cardColors[rand]} />
         </View>
       );
     });

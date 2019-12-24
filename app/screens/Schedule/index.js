@@ -24,7 +24,7 @@ class Schedule extends Component {
       studentId: null,
       schedule: []
     }
-    // this.loadSchedule();
+    
     this.loadSchedule();
   }
 

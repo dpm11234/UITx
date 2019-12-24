@@ -5,7 +5,6 @@ class SubjectCard extends Component {
   render() {
 
     const { color } = this.props;
-
     const renderLesson = () => {
       let numLessons = Array.from(this.props.course.lesson);
       let lessons = [];
@@ -66,7 +65,7 @@ class SubjectCard extends Component {
                 style={{
                   flex: 0,
                   height: 35,
-                  backgroundColor: "rgb(244, 189, 117)",
+                  backgroundColor: color,
                   padding: 3,
                   justifyContent: "center",
                   borderBottomLeftRadius: 10

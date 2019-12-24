@@ -21,6 +21,7 @@ class Login extends Component {
     super(props);
     this.state = {
       isLogin: null,
+      isExist: null,
       user: {
         studentId: "",
         password: ""
@@ -38,26 +39,37 @@ class Login extends Component {
     });
     try {
       const response = await userService.login(user);
-    
+
       if (response.isLogin) {
         this.setState({ ...this.state, isLogin: true, loggingIn: false });
         await AsyncStorage.setItem("isLogin", "true");
         await AsyncStorage.setItem("studentId", this.state.user.studentId);
+        await AsyncStorage.setItem("user", JSON.stringify(this.state.user));
 
         const responseLoginDaa = await userService.loadData(user);
         const responseLoginCourse = await userService.getDataCourses(user);
 
-        console.log(responseLoginDaa);
-        console.log(responseLoginCourse);
-
-        if(responseLoginDaa.isCrawl && responseLoginCourse.isCrawl) {
+        if (responseLoginDaa.isCrawl && responseLoginCourse.isCrawl) {
           this.setState({ ...this.state, loadData: false });
         }
         this.props.navigation.navigate("App");
         return;
-      } else {
-        this.setState({ ...this.state, loggingIn: false, isLogin: false })
       }
+      // } else {
+      //   this.setState({ ...this.state, loggingIn: false, isLogin: false })
+      // }
+
+      if (response.isExist) {
+        this.setState({ ...this.state, isLogin: true, loggingIn: false }, async () => {
+          await AsyncStorage.setItem("isLogin", "true");
+          await AsyncStorage.setItem("studentId", this.state.user.studentId);
+          await AsyncStorage.setItem("user", JSON.stringify(this.state.user));
+          this.props.navigation.navigate("App");
+          
+        });
+        return;
+      }
+
     } catch (err) {
       console.log(err);
     }
@@ -138,15 +150,15 @@ class Login extends Component {
               ) : (
                   <View></View>
                 )}
-                {this.state.loadingData === false ? (
-                  <View style={{ paddingHorizontal: 25 }}>
-                    <Text style={{ fontSize: 20, color: "#c8747e" }}>
-                      Tải dữ liệu thất
+              {this.state.loadingData === false ? (
+                <View style={{ paddingHorizontal: 25 }}>
+                  <Text style={{ fontSize: 20, color: "#c8747e" }}>
+                    Tải dữ liệu thất
                     </Text>
-                  </View>
-                ) : (
-                    <View></View>
-                  )}
+                </View>
+              ) : (
+                  <View></View>
+                )}
               <TextInput
                 style={styles.textInput}
                 placeholder="MSSV"

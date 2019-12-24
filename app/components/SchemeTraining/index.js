@@ -1,46 +1,64 @@
 import React, { Component } from "react";
-import { View, Text } from "react-native";
+import { View, Text, AsyncStorage, Image } from "react-native";
+import { schemeTrainingService, pointService } from '../../services';
 
-const data = [
-  {
-    title: "Các môn lý luận chính trị",
-    courses: [
-      "Những nguyên lý cơ bản của chủ nghĩa Mac-Lênin",
-      "Đường lối cách mạng của Đảng CSVN",
-      "Tư tưởng Hồ Chí Minh"
-    ]
-  },
-  {
-    title: "Toán – Tin học – Khoa học tự nhiên",
-    courses: [
-      "Giải tích",
-      "Đại số tuyến tính",
-      "Cấu trúc rời rạc",
-      "Xác suất thống kê",
-      "Nhập môn Lập trình"
-    ]
-  },
-  {
-    title: "Ngoại ngữ",
-    courses: ["Anh văn 1", "Anh văn 2", "Anh văn 3"]
-  },
-  {
-    title: "Giáo dục thể chất – Giáo dục quốc phòng",
-    courses: [
-      "Giáo dục thể chất 1",
-      "Giáo dục thể chất 2",
-      "Giáo dục quốc phòng"
-    ]
-  },
-  {
-    title: "Môn học khác",
-    courses: ["Kỹ năng nghề nghiệp", "Pháp luật đại cương"]
-  }
-];
 
 class SchemeTraining extends Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      data: [],
+      schemeTraining: []
+    }
+
+    this.getSchemeTraining();
+    this.getSubjectLearned();
+  }
+
+  getSchemeTraining =  async () => {
+    const response = await schemeTrainingService.getSchemeTraining();
+
+    this.setState({
+      ...this.state,
+      data: response.data.curriculum.curriculums[0].listSubjectGroup
+    })
+
+  }
+
+  getSubjectLearned = async () => {
+    const studentId = await AsyncStorage.getItem("studentId");
+    this.setState(
+      {
+        ...this.state,
+        studentId
+      },
+      async () => {
+        const response = await pointService.getPoint(this.state.studentId);
+        let subjectLearned = [];
+        let arr = [];
+
+        if(response.data) {
+          subjectLearned = response.data.point.transcript.map((item, index) => {
+            item.pointSubject.map(subject => {
+              arr.push(subject.subjectId);
+            });
+            return 0;
+          });
+        }
+
+        this.setState({
+          ...this.state,
+          schemeTraining: arr
+        })
+      }
+    );
+  }
+
+
   render() {
-    let elements = data.map((item, index) => {
+    let elements = this.state.data.map((item, index) => {
       return (
         <View key={index}>
           <Text
@@ -52,20 +70,33 @@ class SchemeTraining extends Component {
               fontSize: 17
             }}
           >
-            {item.title}
+            {item.subjectGroup}
           </Text>
-          {item.courses.map((course, index) => {
+          {item.listSubject.map((course, index) => {
+            let check = this.state.schemeTraining.includes(course.subjectId);
+
             return (
               <View
                 key={index}
                 style={{
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
                   borderTopColor: "rgb(139,174,253)",
                   borderTopWidth: 1,
                   paddingVertical: 5,
-                  paddingHorizontal: 15
+                  paddingHorizontal: 15,
+                  backgroundColor: check ? '#C5E0B4' : 'white'
                 }}
               >
-                <Text style={{ fontSize: 16 }}>{course}</Text>
+                <Text style={{ fontSize: 16, flex: 95 }}>{course.subjectName}</Text>
+                {
+                  check ? (
+                    <View style={{ flex: 5 }}>
+                      <Image style={{ height: 10, width: 10 }} source={require("../../../assets/images/tick.png")} />
+                    </View>
+                  ) : <View></View>
+                }
               </View>
             );
           })}

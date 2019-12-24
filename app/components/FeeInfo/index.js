@@ -7,7 +7,6 @@ class FeeInfo extends Component {
 
    constructor(props) {
       super(props);
-
       this.state = {
          tuitions: [],
          studentId: null
